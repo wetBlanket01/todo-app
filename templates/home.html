@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+{% block content %}
+	<div class="container mb-5">
+    </div>
+    <div class="container d-flex d-flex-column justify-content-center mb-5 ">
+        {% block title %} <h1>Todo app</h1> {% endblock %}
+    </div>
+    <div class="container mt-3">
+        This is todo app home
+    </div>
+    <div>
+        {% for todo in todos %}
+            <div class="row">
+                <div class="container card mb-3">
+                    <p>{{ todo.id }} .<span style="color: green;">{{ todo.title }}</span></p>
+                    <p>{{ todo.details }}</p>
+                    <p><span style="color: green;">Created:</span>{{ todo.date }}</p>
+
+                    <div class="container">
+                        <a class="btn btn-secondary" href="{% url 'update' todo.id %}">Update the task</a>
+                        <a class="btn btn-danger" href="{% url 'delete' todo.id %}">Delete</a>
+                    </div>
+                </div>
+            </div>
+            {% empty %}
+            <h4>You have no lists!</h4>
+        {% endfor %}
+    </div>
+    
+    <div class="container">
+        <a class="btn btn-primary" href="{% url 'add' %}">Add a new task</a>
+    </div>
+{% endblock %}
